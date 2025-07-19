@@ -1,32 +1,38 @@
-# Mintlify Starter Kit
+# Mackenzie.TechDocs
 
-Click on `Use this template` to copy the Mintlify starter kit. The starter kit contains examples including
+Welcome to Mackenzie.TechDocs, where you can access some of my sample work. I am actively developing this page at the moment, so things may change from time to time. This is dummy text and subject to change.
 
-- Guide pages
-- Navigation
-- Customizations
-- API Reference pages
-- Use of popular components
+Here, you can find several types of documentation:
+- API Documentation
+- How To Guides
+- Configuration Manuals
+- White Papers
+- Quick Reference Guides
 
 ### Development
 
-Install the [Mintlify CLI](https://www.npmjs.com/package/mint) to preview the documentation changes locally. To install, use the following command
+I am going to see if this format handles code snippets. If so, the dummy Python command will appear in proper syntax below.
 
 ```
-npm i -g mint
+print(f"Hello World!")
 ```
 
-Run the following command at the root of your documentation (where docs.json is)
-
+As another test, I am going to try to put json next:
 ```
-mint dev
+itemName = {
+    "gilgamesh" : "fruit",
+    "midgarsommr" : "vegetable",
+    "chocobo" : "sugar",
+    "Famfrit" : "steak",
+    "aether" : "grain"
+}
 ```
+If these work properly, they will appear as code blocks. If not then... Oops.
 
-### Publishing Changes
+### More Documentation?
 
-Install our Github App to auto propagate changes from your repo to your deployment. Changes will be deployed to production automatically after pushing to the default branch. Find the link to install on your dashboard. 
+Want to learn more about my documentation? Well, check out my [GitHub](https://github.com/mso-docs)!
 
-#### Troubleshooting
+#### Portfolio
 
-- It the dev environment isn't running - Run `mint install` it'll re-install dependencies.
-- Page loads as a 404 - Make sure you are running in a folder with `docs.json`
+Still not satisfied? You can have my [portfolio](https://www.mackenziesobrien.com/), too! 
