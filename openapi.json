@@ -1,0 +1,48 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "YML Display API",
+        "version": "1.0.0",
+        "description": "API for displaying YML files on Mintlify."
+    },
+    "paths": {
+        "/display-yml": {
+            "post": {
+                "summary": "Display YML file",
+                "description": "Accepts a YML file and returns a rendered view for Mintlify.",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-yaml": {
+                            "schema": {
+                                "type": "string",
+                                "description": "YML file content"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Rendered YML view",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "html": {
+                                            "type": "string",
+                                            "description": "Rendered HTML of the YML file"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid YML file"
+                    }
+                }
+            }
+        }
+    }
+}
