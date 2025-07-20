@@ -1,11 +1,8 @@
-
-=======
 # Use the official Ubuntu image as a base.
 FROM ubuntu:latest
 
 # Prevent interactive prompts during package installation.
 ENV DEBIAN_FRONTEND=noninteractive
-
 
 # Update package list, install Apache2.
 
@@ -13,14 +10,8 @@ RUN apt-get update && \
     apt-get install -y apache2 && \
     apt-get clean
 
-
-=======
-
 # Expose port 80 for Apache.
 EXPOSE 80
 
 # Start Apache in the foreground.
-
-=======
-
 CMD ["apachectl", "-D", "FOREGROUND"]
