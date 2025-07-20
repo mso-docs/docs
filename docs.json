@@ -48,10 +48,10 @@
               "api-reference/endpoint/create",
               "api-reference/endpoint/delete",
               "api-reference/endpoint/webhook",
-              "api-reference/api-doc-test1"
+              "api-reference/endpoint/forecast"
             ]
           }
-        ]s
+        ]
       }
     ],
     "global": {
