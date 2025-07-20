@@ -1,23 +1,32 @@
 ---
-title: 'Introduction'
-description: 'Example section for showcasing API endpoints'
+title: 'WeatherNow.io API Documentation'
+description: 'The /forecast endpoint provides current weather forecasts for a specified location. Users can request up to 7 days of weather information using this endpoint.'
 ---
 
 <Note>
-  If you're not looking to build API reference documentation, you can delete
-  this section by removing the api-reference folder.
+  Here is the [Base URL](https://api.sample-doc-weathernow.io/v1/forecast) for the endpoint.
 </Note>
 
 ## Welcome
 
-There are two ways to build API documentation: [OpenAPI](https://mintlify.com/docs/api-playground/openapi/setup) and [MDX components](https://mintlify.com/docs/api-playground/mdx/configuration). For the starter kit, we are using the following OpenAPI specification.
+The /forecast endpoint delivers current weather predictions for a given location. Users can retrieve up to 7 days of forecast data through this endpoint.
+
+Users can query the following parameters using this endpoint:
+-	City name
+-	Coordinates
+-	ZIP code
+The /forecast endpoint will generate responses based on the provided information, which will include information such as:
+-	Precipitation 
+-	Wind
+-	General conditions
+
 
 <Card
-  title="Plant Store Endpoints"
+  title="Forecast Endpoint"
   icon="leaf"
-  href="https://github.com/mintlify/starter/blob/main/api-reference/openapi.json"
+  href="https://github.com/mso-docs/docs/blob/main/api-reference/api-doc-test1.yml"
 >
-  View the OpenAPI specification file
+  View the OpenAPI specification file here.
 </Card>
 
 ## Authentication
@@ -31,3 +40,5 @@ All API endpoints are authenticated using Bearer tokens and picked up from the s
   }
 ]
 ```
+## Rate Limits
+Each API key is limited to 1,000 requests per day. Exceeding this limit returns a 429 response code.
