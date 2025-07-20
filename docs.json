@@ -48,7 +48,8 @@
               "api-reference/endpoint/create",
               "api-reference/endpoint/delete",
               "api-reference/endpoint/webhook",
-              "api-reference/endpoint/forecast"
+              "api-reference/endpoint/forecast",
+              "api-reference/endpoint/put"
             ]
           }
         ]
