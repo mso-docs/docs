@@ -48,12 +48,6 @@
             "openapi": "api-reference/openapi.json"
           },
           {
-          "group": "Introduction",
-          "pages": [
-            "api-reference/introduction"
-         ]
-        },
-          {
             "group": "Endpoints",
             "pages": [
               "api-reference/endpoint/forecast",
