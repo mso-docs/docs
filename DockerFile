@@ -1,3 +1,4 @@
+
 # Use the official Ubuntu image as a base.
 FROM ubuntu:latest
 
@@ -5,12 +6,15 @@ FROM ubuntu:latest
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Update package list and install Apache2.
+
 RUN apt-get update && \
     apt-get install -y apache2 && \
     apt-get clean
+
 
 # Expose port 80 for Apache.
 EXPOSE 80
 
 # Start Apache in the foreground.
+
 CMD ["apachectl", "-D", "FOREGROUND"]
