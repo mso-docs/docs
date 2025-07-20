@@ -132,9 +132,7 @@ paths:
                     type: string
                     example: Service unavailable. Please try again later.
       security:
-        - weather_auth:
-           - read:forecast
-           - write:forecast 
+        - ApiKeyAuth: []
     put:
       tags:
         - Update Forecast
@@ -387,6 +385,8 @@ components:
 
     ErrorResponses:
       type: array
+      items:
+        type: string
       properties:
         '400':
           type: string
