@@ -42,12 +42,14 @@
             "openapi": "api-reference/openapi.json"
           },
           {
+          "group": "Introduction",
+          "pages": [
+            "api-reference/introduction"
+         ]
+        },
+          {
             "group": "Endpoints",
             "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook",
               "api-reference/endpoint/forecast",
               "api-reference/endpoint/put"
             ]
