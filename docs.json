@@ -44,12 +44,13 @@
             ]
           },
           {
-            "group": "Endpoint Examples",
+            "group": "Endpoints",
             "pages": [
               "api-reference/endpoint/get",
               "api-reference/endpoint/create",
               "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
+              "api-reference/endpoint/webhook",
+              "api-reference/api-doc-test1.yml"
             ]
           }
         ]
