@@ -1,6 +1,6 @@
 # Mackenzie.TechDocs
 
-Welcome to Mackenzie.TechDocs, where you can access some of my sample work. I am actively developing this page at the moment, so things may change from time to time. This is dummy text and subject to change.
+Welcome to Mackenzie.TechDocs, where you can access some of my sample work. I am actively developing this page at the moment, so things may change from time to time. This dummy text's subject to change.
 
 Here, you can find several types of documentation:
 - API Documentation
@@ -27,7 +27,7 @@ itemName = {
     "aether" : "grain"
 }
 ```
-If these work properly, they will appear as code blocks. If not then... Oops.
+If these work properly, the samples will appear as code blocks. If not then... Oops.
 
 ### More Documentation?
 
