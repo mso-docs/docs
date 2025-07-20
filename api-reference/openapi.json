@@ -1,216 +1,204 @@
 {
-  "openapi": "3.1.0",
+  "openapi": "3.0.3",
   "info": {
-    "title": "OpenAPI Plant Store",
-    "description": "A sample API that uses a plant store as an example to demonstrate features in the OpenAPI specification",
-    "license": {
-      "name": "MIT"
+    "title": "Weather.io Forecast API",
+    "description": "An API to retrieve current weather and 7-day forecast data by city. You can also use this API to check if a city is included in our forecast database. Additionally, you can contribute CoCoRaHS and NWS data to help improve the accuracy of our forecasts.\n\nNote:\n- All endpoints require an API key provided by the 'X-API-Key' header.\n\nLearn more about Weather.io by checking out our [documentation](https://weather.io/docs).\n\nIf you have any questions or need support, check out the links below:",
+    "termsOfService": "https://weather.io/terms",
+    "contact": {
+      "name": "Weather.io Support",
+      "url": "https://weather.io/support",
+      "email": "mackenzie.techdocs@gmail.com"
     },
-    "version": "1.0.0"
+    "license": {
+      "name": "MIT License",
+      "url": "https://opensource.org/license/mit/"
+    },
+    "version": "1.0.1"
   },
   "servers": [
     {
-      "url": "http://sandbox.mintlify.com"
-    }
-  ],
-  "security": [
-    {
-      "bearerAuth": []
+      "url": "https://weather.io/forecast",
+      "description": "Production Server (uses live weather data)."
     }
   ],
   "paths": {
-    "/plants": {
+    "/forecast": {
       "get": {
-        "description": "Returns all plants from the system that the user has access to",
+        "tags": ["Get Forecast"],
+        "summary": "Get current 1-7 day forecast by city or ZIP Code.",
+        "description": "Returns the current weather forecast for a specified city. Users can input city name or ZIP Code to return a forecast. Forecast includes up to 7 days of weather information.",
         "parameters": [
           {
-            "name": "limit",
             "in": "query",
-            "description": "The maximum number of results to return",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
+            "name": "city",
+            "required": false,
+            "schema": { "type": "string" },
+            "description": "Name of the city (e.g., 'Albuquerque'). If a ZIP Code is provided, the city will be derived from the ZIP Code.",
+            "example": "Albuquerque"
+          },
+          {
+            "in": "query",
+            "name": "zipCode",
+            "required": false,
+            "schema": { "type": "string" },
+            "description": "Optional ZIP Code for the city. If provided, it will be used to derive the city name.",
+            "example": "87101"
+          },
+          {
+            "in": "query",
+            "name": "unit",
+            "required": false,
+            "schema": { "type": "string", "enum": ["Metric", "Imperial"], "default": "Metric" },
+            "description": "The unit of temperature measurement. Can be either 'Metric' or 'Imperial'. Default is 'Metric'."
+          },
+          {
+            "in": "query",
+            "name": "forecast length",
+            "required": false,
+            "schema": { "type": "integer", "minimum": 1, "maximum": 7, "default": 1 },
+            "description": "The number of days for the forecast. Default is 1 day, maximum is 7 days."
           }
         ],
         "responses": {
           "200": {
-            "description": "Plant response",
+            "description": "Successful response with weather forecast data",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/WeatherReport" }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (e.g., missing or invalid city or ZIP Code).",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Plant"
+                  "type": "object",
+                  "properties": {
+                    "error": { "type": "string", "example": "Invalid city name. Please check your input and try again." }
                   }
                 }
               }
             }
           },
-          "400": {
-            "description": "Unexpected error",
+          "401": {
+            "description": "Unauthorized (e.g., missing or invalid API key).",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "description": "Creates a new plant in the store",
-        "requestBody": {
-          "description": "Plant to add to the store",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NewPlant"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "plant response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Plant"
+                  "type": "object",
+                  "properties": {
+                    "error": { "type": "string", "example": "Unauthorized. Please provide a valid API key." }
+                  }
                 }
               }
             }
           },
-          "400": {
-            "description": "unexpected error",
+          "403": {
+            "description": "Forbidden (e.g., API key does not have access to the requested resource).",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "type": "object",
+                  "properties": {
+                    "error": { "type": "string", "example": "Forbidden. You do not have permission to access this resource." }
+                  }
                 }
               }
             }
-          }
-        }
-      }
-    },
-    "/plants/{id}": {
-      "delete": {
-        "description": "Deletes a single plant based on the ID supplied",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "ID of plant to delete",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Plant deleted",
-            "content": {}
           },
-          "400": {
-            "description": "unexpected error",
+          "404": {
+            "description": "City not found (e.g., invalid city name or ZIP Code).",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "type": "object",
+                  "properties": {
+                    "error": { "type": "string", "example": "City not found. Please check the city name or ZIP Code and try again." }
+                  }
                 }
               }
             }
-          }
-        }
-      }
-    }
-  },
-  "webhooks": {
-    "/plant/webhook": {
-      "post": {
-        "description": "Information about a new plant added to the store",
-        "requestBody": {
-          "description": "Plant added to the store",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NewPlant"
+          },
+          "500": {
+            "description": "Internal server error (e.g., server issues or unexpected errors).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": { "type": "string", "example": "Internal server error. Please try again later." }
+                  }
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service unavailable (e.g., API service is temporarily down).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": { "type": "string", "example": "Service unavailable. Please try again later." }
+                  }
+                }
               }
             }
           }
         },
-        "responses": {
-          "200": {
-            "description": "Return a 200 status to indicate that the data was received successfully"
-          }
-        }
+        "security": [{ "ApiKeyAuth": [] }]
       }
     }
   },
   "components": {
-    "schemas": {
-      "Plant": {
-        "required": [
-          "name"
-        ],
-        "type": "object",
-        "properties": {
-          "name": {
-            "description": "The name of the plant",
-            "type": "string"
-          },
-          "tag": {
-            "description": "Tag to specify the type",
-            "type": "string"
-          }
-        }
-      },
-      "NewPlant": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/Plant"
-          },
-          {
-            "required": [
-              "id"
-            ],
-            "type": "object",
-            "properties": {
-              "id": {
-                "description": "Identification number of the plant",
-                "type": "integer",
-                "format": "int64"
-              }
-            }
-          }
-        ]
-      },
-      "Error": {
-        "required": [
-          "error",
-          "message"
-        ],
-        "type": "object",
-        "properties": {
-          "error": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "message": {
-            "type": "string"
-          }
-        }
+    "securitySchemes": {
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-API-Key"
       }
     },
-    "securitySchemes": {
-      "bearerAuth": {
-        "type": "http",
-        "scheme": "bearer"
+    "schemas": {
+      "WeatherResponse": {
+        "type": "object",
+        "properties": {
+          "city": { "description": "If a ZIP Code is provided, the city will be derived from the ZIP Code.", "type": "string", "example": "Las Cruces" },
+          "zipCode": { "description": "Optional ZIP Code for the city. If provided, it will be used to derive the city name.", "type": "string", "example": "88001" },
+          "temperature": { "type": "number", "format": "float", "example": 23.5 },
+          "unit": { "description": "The unit of temperature measurement. Can be either 'Metric' or 'Imperial'.", "type": "string", "example": "Metric" },
+          "description": { "description": "A brief description of the current weather conditions.", "type": "string", "example": "Partly cloudy" }
+        }
+      },
+      "ForecastDay": {
+        "type": "object",
+        "properties": {
+          "date": { "description": "The date for the forecast day in ISO 8601 format.", "type": "string", "format": "date", "example": "2023-10-01" },
+          "highTemperature": { "description": "The high temperature for the day in the specified unit.", "type": "number", "format": "float", "example": 28.0 },
+          "lowTemperature": { "description": "The low temperature for the day in the specified unit.", "type": "number", "format": "float", "example": 15.0 },
+          "description": { "description": "A brief description of the weather conditions for the day.", "type": "string", "example": "Sunny with a chance of rain" }
+        }
+      },
+      "WeatherReport": {
+        "type": "object",
+        "properties": {
+          "ForecastDay": { "description": "A list of forecasted weather conditions for the next 7 days.", "type": "array", "items": { "$ref": "#/components/schemas/ForecastDay" } },
+          "WeatherResponse": { "description": "The current weather conditions for the city.", "type": "object", "$ref": "#/components/schemas/WeatherResponse" }
+        }
+      },
+      "ForecastResponse": {
+        "type": "object",
+        "properties": {
+          "city": { "description": "The name of the city for which the forecast is provided.", "type": "string", "example": "Alamogordo" },
+          "zipCode": { "description": "The ZIP Code for the city, if provided.", "type": "string", "example": "88310" },
+          "unit": { "description": "The unit of temperature measurement used in the forecast.", "type": "string", "example": "Metric" },
+          "currentWeather": { "description": "The current weather conditions for the city.", "type": "object", "$ref": "#/components/schemas/WeatherResponse" },
+          "forecast": { "description": "A list of forecasted weather conditions for the next 7 days.", "type": "array", "items": { "$ref": "#/components/schemas/ForecastDay" } }
+        }
+      },
+      "ErrorResponses": {
+        "type": "array",
+        "items": { "type": "string" }
       }
     }
   }
