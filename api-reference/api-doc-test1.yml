@@ -22,7 +22,7 @@ info:
   version: 1.0.1
 servers:
   - url: https://weather.io/forecast
-    description: Production server (uses live weather data).
+    description: Production Server (uses live weather data).
 
 paths:
   /forecast:
