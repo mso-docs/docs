@@ -14,22 +14,22 @@
         "tab": "Guides",
         "groups": [
           {
-            "group": "Get Started",
+            "group": "Welcome",
             "pages": [
               "index",
               "quickstart",
-              "development"
+              "docs-as-code"
             ]
           },
           {
-            "group": "Essentials",
+            "group": "Technical Writing Mentorship Program",
             "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/settings",
-              "essentials/navigation",
-              "essentials/reusable-snippets"
+              "essentials/slack-audit",
+              "essentials/twilio",
+              "essentials/plaid",
+              "essentials/oas",
+              "essentials/postman",
+              "essentials/movie-db"
             ]
           }
         ]
@@ -60,18 +60,18 @@
     "global": {
       "anchors": [
         {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
+          "anchor": "Portfolio",
+          "href": "https://mackenziesobrien.com/",
           "icon": "book-open-cover"
         },
         {
-          "anchor": "Community",
-          "href": "https://mintlify.com/community",
+          "anchor": "GitHub",
+          "href": "https://github.com/mso-docs",
           "icon": "slack"
         },
         {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
+          "anchor": "LinkedIn",
+          "href": "https://www.linkedin.com/in/mackenzieoc/",
           "icon": "newspaper"
         }
       ]
@@ -96,9 +96,8 @@
   },
   "footer": {
     "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
+      "github": "https://github.com/mso-docs",
+      "linkedin": "https://linkedin.com/in/mackenzieoc/"
     }
   },
   "api": {
