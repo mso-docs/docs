@@ -1,0 +1,125 @@
+---
+title: 'Docs-as-Code Workflow'
+description: 'How I build, preview, lint, and deploy documentation using modern docs-as-code practices.'
+---
+
+<Info>
+  My documentation workflow follows a full <strong>docs-as-code</strong> model: version control, automated CI/CD, reproducible builds, and an opinionated toolchain.<br />
+  Ensure you have Node.js v19+ and a valid <code>docs.json</code> configuration file before continuing.
+</Info>
+
+This guide outlines how I run, preview, validate, and deploy documentation across my projects as a Senior Technical Writer specializing in docs-as-code systems.
+
+## Local Development
+
+I iterate quickly using a live local preview server.
+
+**Step 1:** Install the documentation CLI:
+
+<CodeGroup>
+
+```bash npm
+npm i -g mintlify
+```
+
+```bash yarn
+yarn global add mintlify
+```
+
+</CodeGroup>
+
+**Step 2:** Navigate to your documentation directory and run:
+
+```bash
+mintlify dev
+```
+
+A live preview becomes available at `http://localhost:3000`, updating automatically as you edit MDX, components, or configuration files.
+
+### Custom Ports
+
+To run multiple documentation sites simultaneously, specify a custom port:
+
+```bash
+mintlify dev --port 3333
+```
+
+If the requested port is taken, the CLI automatically selects the next available one:
+
+```md
+Port 3000 is already in use. Trying 3001 instead.
+```
+
+## Keeping Tooling in Sync
+
+Version alignment is critical in docs-as-code environments. If local previews differ from production output, update the CLI:
+
+<CodeGroup>
+
+```bash npm
+npm i -g mintlify@latest
+```
+
+```bash yarn
+yarn global upgrade mintlify
+```
+
+</CodeGroup>
+
+This ensures consistent rendering across local development, preview builds, and CI pipelines.
+
+## Quality Checks & Link Validation
+
+Broken links and structural issues are common pain points in documentation workflows. I use the CLI to proactively validate all internal references:
+
+```bash
+mintlify broken-links
+```
+
+This complements additional linters I use (Vale, Spectral, Markdownlint) to maintain content, schema, and style quality.
+
+## Deployment Workflow
+
+<Tip>
+  Ideal for teams using Git-based workflows: unlimited editors, automated previews, and branch-based deployments under the Pro plan and above.
+</Tip>
+
+Successful deployments surface clean build logs and validation checks, similar to:
+
+<Frame>
+  <img src="/images/checks-passed.png" style={{ borderRadius: '0.5rem' }} />
+</Frame>
+
+I typically deploy documentation via GitHub Actions, automating formatting, linting, building, and publishing to production environments.
+
+## Editor & Formatting Setup
+
+Consistent formatting reduces diff churn and improves PR reviews.
+Recommended VSCode extensions:
+
+- **MDX** — syntax highlighting & linting
+- **Prettier** — formatting
+- **EditorConfig** — consistent whitespace
+- **Markdownlint** — optional markdown standards enforcement
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title='Error: Could not load the "sharp" module using the darwin-arm64 runtime'>
+    This usually indicates an incompatible Node version.<br /><br />
+    Steps:<br />
+    1. Remove Mintlify: <code>npm remove -g mintlify</code><br />
+    2. Upgrade Node to v19+<br />
+    3. Reinstall: <code>npm install -g mintlify</code>
+  </Accordion>
+
+  <Accordion title='Unknown or inconsistent CLI errors'>
+    Try clearing the Mintlify cache directory:<br /><br />
+    <code>rm -rf ~/.mintlify</code><br />
+    Then restart:<br />
+    <code>mintlify dev</code>
+  </Accordion>
+</AccordionGroup>
+
+For full release notes, see the CLI changelog:<br />
+[View Mintlify CLI Versions](https://www.npmjs.com/package/mintlify?activeTab=versions)
