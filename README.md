@@ -1,6 +1,6 @@
 # Mackenzie.TechDocs
 
-Welcome to my technical documentation portfolio. This repository showcases samples of my work as I participate in the Technical Writing Mentorship Program.
+Welcome to my technical documentation portfolio. This repository showcases samples of my work.
 
 ## About This Repository
 
