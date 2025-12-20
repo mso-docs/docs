@@ -1,6 +1,6 @@
 # Mackenzie.TechDocs
 
-Welcome to my technical documentation portfolio. This repository showcases samples of my work.
+Welcome to my technical documentation portfolio. This repository showcases samples of my work. I will be updating this shortly with more work.
 
 ## About This Repository
 
